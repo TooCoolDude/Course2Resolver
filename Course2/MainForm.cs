@@ -7,6 +7,8 @@ namespace Course2
         List<ConsumerObject> _consumerObjects;
 
         List<WireSIP> _wiresSIP;
+
+        List<WireAS> _wiresAS;
         
         public MainForm()
         {
@@ -17,6 +19,8 @@ namespace Course2
             _consumerObjects = ConsumerObjectsReader.GetConsumerObjects();
 
             _wiresSIP = WiresSIPReader.GetWiresSIP();
+
+            _wiresAS = WiresASReader.GetWiresAS();
         }
 
         private void label1_Click(object sender, EventArgs e)
