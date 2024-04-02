@@ -9,6 +9,8 @@ namespace Course2
         List<WireSIP> _wiresSIP;
 
         List<WireAS> _wiresAS;
+
+        List<Transformer> _transfoemers;
         
         public MainForm()
         {
@@ -21,6 +23,8 @@ namespace Course2
             _wiresSIP = WiresSIPReader.GetWiresSIP();
 
             _wiresAS = WiresASReader.GetWiresAS();
+
+            _transfoemers = TransformersReader.GetTransformers();
         }
 
         private void label1_Click(object sender, EventArgs e)
