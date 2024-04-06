@@ -10,7 +10,7 @@ namespace Course2
 {
     public static class Calculator
     {
-        public static async Task<Dictionary<string, string>> GetVariablesAndValues(Variant v)
+        public static Dictionary<string, string> GetVariablesAndValues(Variant v)
         {
             var d = new Dictionary<string, string>();
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");

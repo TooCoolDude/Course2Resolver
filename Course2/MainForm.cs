@@ -38,10 +38,10 @@ namespace Course2
             {
                 var variant = _variants.Where(v => v.Num == variantNum).First();
 
-                File.Copy("src\\Template.docx", Directory.GetCurrentDirectory() + "\\Result.docx", true);
+                File.Copy("sources\\Template.docx", Directory.GetCurrentDirectory() + "\\Result.docx", true);
 
                 var replacements = Calculator.GetVariablesAndValues(variant);
-                DocumentInteractor.WriteChanges(Directory.GetCurrentDirectory() + "\\Result.docx", await replacements);
+                DocumentInteractor.WriteChanges(Directory.GetCurrentDirectory() + "\\Result.docx", replacements);
             }
 
             else
