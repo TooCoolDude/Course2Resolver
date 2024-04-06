@@ -10,7 +10,7 @@ namespace Course2
 
         List<WireAS> _wiresAS;
 
-        List<Transformer> _transfoemers;
+        List<Transformer> _transformers;
         
         public MainForm()
         {
@@ -24,7 +24,7 @@ namespace Course2
 
             _wiresAS = WiresASReader.GetWiresAS();
 
-            _transfoemers = TransformersReader.GetTransformers();
+            _transformers = TransformersReader.GetTransformers();
         }
 
         private void label1_Click(object sender, EventArgs e)
