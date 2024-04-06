@@ -29,6 +29,9 @@
     <None Update="sources\ElectricalConsumers.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="sources\Template.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="sources\Transformers.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
