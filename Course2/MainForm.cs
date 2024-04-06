@@ -37,6 +37,11 @@ namespace Course2
             if (int.TryParse(textBox1.Text, out int variantNum) && Enumerable.Range(1,30).Contains(variantNum))
             {
                 var variant = _variants.Where(v => v.Num == variantNum).First();
+
+                File.Copy("src\\Template.docx", Directory.GetCurrentDirectory() + "\\Result.docx", true);
+
+                var replacements = Calculator.GetVariablesAndValues(variant);
+                DocumentInteractor.WriteChanges(Directory.GetCurrentDirectory() + "\\Result.docx", await replacements);
             }
 
             else
