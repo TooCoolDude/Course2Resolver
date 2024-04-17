@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid.IO;
 using unvell.ReoGrid;
+using System.Globalization;
 
 namespace Course2
 {
@@ -19,6 +20,8 @@ namespace Course2
             var sheet1 = workbook.Worksheets[0];
 
             List<Transformer> transformers = new List<Transformer>();
+
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
             for (int i = 11; i < 145; i += 7)
             {

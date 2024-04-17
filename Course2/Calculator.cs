@@ -10,30 +10,61 @@ namespace Course2
 {
     public static class Calculator
     {
-        public static Dictionary<string, string> GetBlock1(Variant v)
+        public static async Task<Dictionary<string, string>> GetValuesToReplace(Variant v)
         {
             var d = new Dictionary<string, string>();
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
 
             var varN = v.Num.ToString();
-            d["varN"] = varN;
+            d["{varN}"] = varN;
 
             var objName = v.ObjName;
-            d["objName"] = objName;
+            d["{objName}"] = objName;
 
             var PmaxDay = v.PmaxDay;
-            d["PmaxDay"] = PmaxDay.ToString();
+            d["{PmaxDay}"] = PmaxDay.ToString();
 
             var PmaxEvening = v.PmaxEvening;
-            d["PmaxEvening"] = PmaxEvening.ToString();
+            d["{PmaxEvening}"] = PmaxEvening.ToString();
 
             var lineLength = v.LineLength;
-            d["LineLength"] = lineLength.ToString();
+            d["{LineLength}"] = lineLength.ToString();
 
             var lightsSrep = v.LightsStep;
-            d["LightsStep"] = lightsSrep.ToString();
+            d["{LightsStep}"] = lightsSrep.ToString();
 
-            
+            //
+            var consumerSelector = new ConsumerSelectorForm();
+            consumerSelector.Show();
+            var con = consumerSelector.SelectedConsumerObject;
+
+            var dayCosFi = con.DayCosFi;
+            d["{dayCosFi}"] = dayCosFi.ToString();
+
+            var dayTgFi = con.DayTgFi;
+            d["{dayTgFi}"] = con.DayTgFi.ToString();
+
+            var eveningCosFi = con.EveningCosFi;
+            d["{eveningCosFi}"] = eveningCosFi.ToString();
+
+            var eveningTgFi = con.EveningTgFi;
+            d["{eveningTgFi}"] = eveningTgFi.ToString();
+
+            var conName = con.ObjName;
+            d["{conName}"] = conName;
+
+            var Sdaymax = PmaxDay / dayCosFi;
+            d["{Sdaymax}"] = Sdaymax.ToString();
+
+            var Seveningmax = PmaxEvening / eveningCosFi;
+            d["{Seveningmax}"] = Seveningmax.ToString();
+
+            var Qdaymax = Math.Sqrt((Sdaymax * Sdaymax) - (PmaxDay * PmaxDay));
+            d["{Qdaymax}"] = Qdaymax.ToString();
+
+            var Qeveningmax = Math.Sqrt((Seveningmax * Seveningmax) - (PmaxEvening * PmaxEvening));
+            d["{Qeveningmax}"] = Qeveningmax.ToString();
+
             //TODO: formulas and calculations...
 
             foreach (var key in d.Keys)

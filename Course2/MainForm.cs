@@ -4,7 +4,7 @@ namespace Course2
     {
         List<Variant> _variants;
 
-        List<ConsumerObject> _consumerObjects;
+        
 
         List<WireSIP> _wiresSIP;
 
@@ -18,8 +18,6 @@ namespace Course2
 
             _variants = VariantsReader.GetVariants();
 
-            _consumerObjects = ConsumerObjectsReader.GetConsumerObjects();
-
             _wiresSIP = WiresSIPReader.GetWiresSIP();
 
             _wiresAS = WiresASReader.GetWiresAS();
@@ -32,7 +30,7 @@ namespace Course2
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textBox1.Text, out int variantNum) && Enumerable.Range(1,30).Contains(variantNum))
             {
@@ -40,7 +38,7 @@ namespace Course2
 
                 File.Copy("sources\\Template.docx", Directory.GetCurrentDirectory() + "\\Result.docx", true);
 
-                var replacements = Calculator.GetBlock1(variant);
+                var replacements = await Calculator.GetValuesToReplace(variant);
                 DocumentInteractor.WriteChanges(Directory.GetCurrentDirectory() + "\\Result.docx", replacements);
             }
 
