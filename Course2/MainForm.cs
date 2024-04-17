@@ -40,7 +40,7 @@ namespace Course2
 
                 File.Copy("sources\\Template.docx", Directory.GetCurrentDirectory() + "\\Result.docx", true);
 
-                var replacements = Calculator.GetVariablesAndValues(variant);
+                var replacements = Calculator.GetBlock1(variant);
                 DocumentInteractor.WriteChanges(Directory.GetCurrentDirectory() + "\\Result.docx", replacements);
             }
 

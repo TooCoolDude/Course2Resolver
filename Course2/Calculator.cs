@@ -10,11 +10,30 @@ namespace Course2
 {
     public static class Calculator
     {
-        public static Dictionary<string, string> GetVariablesAndValues(Variant v)
+        public static Dictionary<string, string> GetBlock1(Variant v)
         {
             var d = new Dictionary<string, string>();
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
 
+            var varN = v.Num.ToString();
+            d["varN"] = varN;
+
+            var objName = v.ObjName;
+            d["objName"] = objName;
+
+            var PmaxDay = v.PmaxDay;
+            d["PmaxDay"] = PmaxDay.ToString();
+
+            var PmaxEvening = v.PmaxEvening;
+            d["PmaxEvening"] = PmaxEvening.ToString();
+
+            var lineLength = v.LineLength;
+            d["LineLength"] = lineLength.ToString();
+
+            var lightsSrep = v.LightsStep;
+            d["LightsStep"] = lightsSrep.ToString();
+
+            
             //TODO: formulas and calculations...
 
             foreach (var key in d.Keys)
