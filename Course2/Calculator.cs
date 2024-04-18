@@ -29,14 +29,18 @@ namespace Course2
 
             var lineLength = v.LineLength;
             d["{LineLength}"] = lineLength.ToString();
+            d["{LineLengthkm}"] = (lineLength / 1000).ToString();
 
             var lightsStep = v.LightsStep;
             d["{LightsStep}"] = lightsStep.ToString();
 
             //select consumer
-            var consumerSelector = new ConsumerSelectorForm();
-            consumerSelector.Show();
-            var con = consumerSelector.SelectedConsumerObject;
+
+            //var consumerSelector = new ConsumerSelectorForm();
+            //consumerSelector.Show();
+            //var con = consumerSelector.SelectedConsumerObject;
+
+            var con = new ConsumerObject("",1,1,1,1);
 
             var dayCosFi = con.DayCosFi;
             d["{dayCosFi}"] = dayCosFi.ToString();
@@ -69,24 +73,33 @@ namespace Course2
             d["{Nlights}"] = Nlights.ToString();
 
             var Plights = 0.125 * Nlights;
-            d["{Psum}"] = Plights.ToString();
+            d["{Plights}"] = Plights.ToString();
 
             var Slights = Plights / 0.92;
             d["{Slights}"] = Slights.ToString();
 
             var Stpmax = Sdaymax + Slights;
-            d["{Stpmax}"] = Sdaymax.ToString();
+            d["{Stpmax}"] = Stpmax.ToString();
 
             var St = Stpmax * 1.3;
             d["{St}"] = St.ToString();
 
             //select transformer
-            var tr = new Transformer(1, new[] { 1.0 } ,new[] { 1.0 }, new[] { 1.0 }, 1, 1, new[]{ 1.0});
+            var tr = new Transformer(250, new[] { 1.0 } ,new[] { 1.0 }, new[] { 1.0 }, 1, 1, new[]{ 1.0});
+
+            var Psum = PmaxDay + Plights;
+            d["{Psum}"] = Psum.ToString();
+
+            var Qsum = Qdaymax + (Slights * Math.Sqrt(1 - (0.92 * 0.92)));
+            d["{Qsum}"] = Qsum.ToString();
+
+            var Ssum = Math.Sqrt(Psum * Psum + (Qsum * Qsum));
+            d["{Ssum}"] = Ssum.ToString();
 
             var trSnom = tr.Power;
             d["{trSnom}"] = trSnom.ToString();
 
-            var trUkz = tr.ShortVoltages[1]; // 0 1
+            var trUkz = tr.ShortVoltages[0]; // 0 1
             d["{trUkz}"] = trUkz.ToString();
 
             var trIxx = tr.NoLoadCurrent;
@@ -95,23 +108,26 @@ namespace Course2
             var trLoseXX = tr.NoLoadLoses;
             d["{trLoseXX}"] = trLoseXX.ToString();
 
-            var trLoseKZ = tr.ShortLoses[1]; // 0 1
+            var trLoseKZ = tr.ShortLoses[0]; // 0 1
             d["{trLoseKZ}"] = trLoseKZ.ToString();
 
             var Imax04 = Stpmax / (0.38 * Math.Sqrt(3));
-            d["{Imaxtp}"] = Imax04.ToString();
+            d["{Imax04}"] = Imax04.ToString();
+
+
 
             //select wiresSIP 0.4
             var sip = new WireSIP("",1,1,1,1,1,1,1);
+
+            var sipName = sip.WiresNumAndSize;
+            d["{sipName}"] = sipName.ToString();
+            d["{sipSize}"] = sipName.Substring(2, 2);
 
             var sipr0 = sip.ResistancePhase25;
             d["{sipr0}"] = sipr0.ToString();
 
             var sipx0 = sip.InductancePhase;
             d["{sipx0}"] = sipx0.ToString();
-
-            var Psum = PmaxDay + Plights;
-            d["{Psum}"] = Psum.ToString();
 
             var Ma04 = Psum * lineLength / 1000;
             d["{Ma04}"] = Ma04.ToString();
@@ -129,6 +145,9 @@ namespace Course2
 
             //select wireAS 10
             var asw = new WireAS(1,1,1,1,1,1,1,1,1,1,1);
+
+            var aswSize = asw.WireSize;
+            d["{aswSize}"] = aswSize.ToString();
 
             var aswr0 = asw.TypeAS_Resistance;
             d["{awsr0}"] = aswr0.ToString();
@@ -163,7 +182,7 @@ namespace Course2
             d["{R04}"] = R04.ToString();
 
             var X04 = sipx0 * lineLength / 1000;
-            d["{{X04}"] = X04.ToString();
+            d["{X04}"] = X04.ToString();
 
             var Z04 = Math.Sqrt(R04 * R04 + (X04 * X04));
             d["{Z04}"] = Z04.ToString();
@@ -194,7 +213,13 @@ namespace Course2
             var Ik1two = Ik1three * (Math.Sqrt(3) / 2);
             d["{Ik1two}"] = Ik1two.ToString();
 
-            var Zn = Math.Sqrt(Math.Pow((sipr0 + sip.ResistanceEarth25)*lineLength / 1000, 2) + Math.Pow((sipx0 + sip.InductanceEarth)*lineLength / 1000, 2));
+            var sipre = sip.ResistanceEarth25;
+            d["{sipre}"] = sip.ResistanceEarth25.ToString();
+
+            var sipxe = sip.InductanceEarth;
+            d["{sipxe}"] = sipxe.ToString();
+
+            var Zn = Math.Sqrt(Math.Pow((sipr0 + sipre)*lineLength / 1000, 2) + Math.Pow((sipx0 + sipxe)*lineLength / 1000, 2));
             d["{Zn}"] = Z04.ToString();
 
             var ZTO = trSnom switch
@@ -209,14 +234,31 @@ namespace Course2
                 400=>0.32,
                 630=>0.25
             };
+            d["{ZTO}"] = ZTO.ToString();
             
             var Ik1one = 220 / (Zn + (ZTO / 3));
             d["{Ik1one}"] = Ik1one.ToString();
 
-            var Iud;
+            var Xk = 4.03 + X10;
+            d["{Xk}"] = Xk.ToString();
 
+            var Ta = Xk / (314 * R10);
+            d["{Ta}"] = Ta.ToString();
 
+            var kud = 1 + Math.Pow(Math.E, -(0.01/Ta));
+            d["{kud}"] = kud.ToString();
 
+            var iud10 = Math.Sqrt(2) * kud * Ikv10;
+            d["{iud10}"] = iud10.ToString();
+
+            var iud04 = Math.Sqrt(2) * kud * Ikv;
+            d["{iud04}"] = iud04.ToString();
+
+            var Ipv = 1.25 * Imax10;
+            d["{Ipv}"] = Ipv.ToString();
+
+            var It = 1.2 * Imax04;
+            d["{It}"] = It.ToString();
 
 
             //TODO: formulas and calculations...
