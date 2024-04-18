@@ -142,13 +142,80 @@ namespace Course2
             var Mp10 = Qdaymax * 12 / 1000;
             d["{Mp10}"] = Mp04.ToString();
 
-            var Uloses10 = (aswr0 * Ma10 / 10) +(aswx0 * Mp10 / 10);
+            var Uloses10 = (aswr0 * Ma10 / 10) + (aswx0 * Mp10 / 10);
             d["{Uloses10}"] = Uloses10.ToString();
 
 
 
             var R10 = aswr0 * 12;
-            d["{R10}"] = 
+            d["{R10}"] = R10.ToString();
+
+            var X10 = aswx0 * 12;
+            d["{X10}"] = X10.ToString();
+
+            var Z10 = Math.Sqrt(R10 * R10 + (X10 * X10));
+            d["{Z10}"] = Z10.ToString();
+
+            var Z1004 = Z10 * (0.38 * 0.38 / 100);
+            d["{Z1004}"] = Z1004.ToString();
+
+            var R04 = sipr0 * lineLength / 1000;
+            d["{R04}"] = R04.ToString();
+
+            var X04 = sipx0 * lineLength / 1000;
+            d["{{X04}"] = X04.ToString();
+
+            var Z04 = Math.Sqrt(R04 * R04 + (X04 * X04));
+            d["{Z04}"] = Z04.ToString();
+
+
+
+            var Ikv = 0.38 / (Math.Sqrt(3) * (0.006 * Z1004));
+            d["{Ikv}"] = Ikv.ToString();
+
+            var Ikv10 = Ikv * 0.38 / 10;
+            d["{Ikv10}"] = Ikv10.ToString();
+
+            var Rtr = (trLoseXX / trSnom) * (0.38 * 0.38 / trSnom) * 1000;
+            d["{Rtr}"] = Rtr.ToString();
+
+            var Xtr = (trLoseKZ / 100) * (0.38 * 0.38 / trSnom) * 1000;
+            d["{Xtr}"] = Xtr.ToString();
+
+            var Ztr = Math.Sqrt(Math.Pow(Rtr + 0.002, 2) + (Xtr * Xtr));
+            d["{Ztr}"] = Ztr.ToString();
+
+            var Ikn = 0.38 / (Math.Sqrt(3) * (0.006 * Z1004 + Ztr));
+            d["{Ikn}"] = Ikn.ToString();
+
+            var Ik1three = 0.38 / (Math.Sqrt(3) * (0.006 * Z1004 + Ztr + Z04));
+            d["{Ik1three}"]= Ik1three.ToString();
+
+            var Ik1two = Ik1three * (Math.Sqrt(3) / 2);
+            d["{Ik1two}"] = Ik1two.ToString();
+
+            var Zn = Math.Sqrt(Math.Pow((sipr0 + sip.ResistanceEarth25)*lineLength / 1000, 2) + Math.Pow((sipx0 + sip.InductanceEarth)*lineLength / 1000, 2));
+            d["{Zn}"] = Z04.ToString();
+
+            var ZTO = trSnom switch
+            {
+                16=>4.62,
+                25=>3.6,
+                40=>2.58,
+                63=>1.63,
+                100=>1.07,
+                160=>0.7,
+                250=>0.43,
+                400=>0.32,
+                630=>0.25
+            };
+            
+            var Ik1one = 220 / (Zn + (ZTO / 3));
+            d["{Ik1one}"] = Ik1one.ToString();
+
+            var Iud;
+
+
 
 
 
