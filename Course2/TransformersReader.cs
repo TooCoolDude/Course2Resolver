@@ -37,7 +37,8 @@ namespace Course2
                         ShortLoses: sheet1.GetCellData<string>("A" + (i + 6)).Split('/').Select(x => double.Parse(x.Trim())).ToArray()
                     );
 
-                transformers.Add(transformer);
+                if (transformer.FirstVoltages.Contains(10))
+                    transformers.Add(transformer);
             }
 
             return transformers;

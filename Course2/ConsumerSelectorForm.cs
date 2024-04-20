@@ -28,6 +28,7 @@ namespace Course2
         private void button1_Click(object sender, EventArgs e)
         {
             SelectedConsumerObject = _consumerObjects.Where(o=>o.ObjName == comboBox1.Text).First();
+            DialogResult = DialogResult.OK;
         }
     }
 }

@@ -35,12 +35,16 @@ namespace Course2
             d["{LightsStep}"] = lightsStep.ToString();
 
             //select consumer
-
-            //var consumerSelector = new ConsumerSelectorForm();
-            //consumerSelector.Show();
-            //var con = consumerSelector.SelectedConsumerObject;
-
-            var con = new ConsumerObject("",1,1,1,1);
+            ConsumerObject con;
+            var consumerForm = new ConsumerSelectorForm();
+            if(consumerForm.ShowDialog() == DialogResult.OK)
+            {
+                con = consumerForm.SelectedConsumerObject;
+            }
+            else
+            {
+                con = null;
+            }
 
             var dayCosFi = con.DayCosFi;
             d["{dayCosFi}"] = dayCosFi.ToString();
@@ -85,7 +89,16 @@ namespace Course2
             d["{St}"] = St.ToString();
 
             //select transformer
-            var tr = new Transformer(250, new[] { 1.0 } ,new[] { 1.0 }, new[] { 1.0 }, 1, 1, new[]{ 1.0});
+            Transformer tr;
+            var trForm = new TransformerSelectorForm(double.Parse(ShortenStringNum(St.ToString())));
+            if (trForm.ShowDialog() == DialogResult.OK)
+            {
+                tr = trForm.SelectedTransformer;
+            }
+            else
+            {
+                tr = null;
+            }
 
             var Psum = PmaxDay + Plights;
             d["{Psum}"] = Psum.ToString();
@@ -99,7 +112,7 @@ namespace Course2
             var trSnom = tr.Power;
             d["{trSnom}"] = trSnom.ToString();
 
-            var trUkz = tr.ShortVoltages[0]; // 0 1
+            var trUkz = tr.ShortVoltages.Length > 1 ? tr.ShortVoltages[1] : tr.ShortVoltages[0];
             d["{trUkz}"] = trUkz.ToString();
 
             var trIxx = tr.NoLoadCurrent;
@@ -108,7 +121,7 @@ namespace Course2
             var trLoseXX = tr.NoLoadLoses;
             d["{trLoseXX}"] = trLoseXX.ToString();
 
-            var trLoseKZ = tr.ShortLoses[0]; // 0 1
+            var trLoseKZ = tr.ShortLoses.Length > 1 ? tr.ShortLoses[1] : tr.ShortLoses[0];
             d["{trLoseKZ}"] = trLoseKZ.ToString();
 
             var Imax04 = Stpmax / (0.38 * Math.Sqrt(3));
@@ -117,7 +130,16 @@ namespace Course2
 
 
             //select wiresSIP 0.4
-            var sip = new WireSIP("",1,1,1,1,1,1,1);
+            WireSIP sip;
+            var sipForm = new SIPSelectorForm(double.Parse(ShortenStringNum(Imax04.ToString())));
+            if (sipForm.ShowDialog() == DialogResult.OK)
+            {
+                sip = sipForm.SelectedSIP;
+            }
+            else
+            {
+                sip = null;
+            }
 
             var sipName = sip.WiresNumAndSize;
             d["{sipName}"] = sipName.ToString();
@@ -138,13 +160,20 @@ namespace Course2
             var Uloses04 = (sipr0 * Ma04 / 0.38) + (sipx0 * Mp04 / 0.38);
             d["{Uloses04}"] = Uloses04.ToString();
 
-
-
             var Imax10 = Stpmax / (10 * Math.Sqrt(3));
             d["{Imax10}"] = Imax10.ToString();
 
             //select wireAS 10
-            var asw = new WireAS(1,1,1,1,1,1,1,1,1,1,1);
+            WireAS asw;
+            var aswForm = new ASWSelectorForm(double.Parse(ShortenStringNum(Imax10.ToString())));
+            if (aswForm.ShowDialog() == DialogResult.OK)
+            {
+                asw = aswForm.SelectedASW;
+            }
+            else
+            {
+                asw = null;
+            }
 
             var aswSize = asw.WireSize;
             d["{aswSize}"] = aswSize.ToString();
@@ -276,7 +305,7 @@ namespace Course2
             int pointPosition = 0;
             for (int i = 0; i < s.Length; i++)
             {
-                if (s[i] == ',')
+                if (s[i] == ',' || s[i] == '.')
                 {
                     pointPosition = i;
                     for (int j = 4; j > 0; j--)

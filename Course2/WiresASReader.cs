@@ -27,10 +27,10 @@ namespace Course2
                     (
                         WireSize: sheet1.GetCellData<double>("A" + i),
                         TypeA_Mass: sheet1.GetCellData<double>("A" + (i + 1)),
-                        TypeA_Current: sheet1.GetCellData<double>("A" + (i + 2)),
+                        TypeA_Current: sheet1.GetCellData<double>("A" + (i + 2)) / 10,
                         TypeA_Resistance: sheet1.GetCellData<double>("A" + (i + 3)),
                         TypeAS_Mass: sheet1.GetCellData<double>("A" + (i + 4)),
-                        TypeAS_Current: sheet1.GetCellData<double>("A" + (i + 5)),
+                        TypeAS_Current: sheet1.GetCellData<double>("A" + (i + 5)) / 10,
                         TypeAS_Resistance: sheet1.GetCellData<double>("A" + (i + 6)),
 
                         Inductance1: sheet1.GetCellData<double>("A" + (i + 72)),
