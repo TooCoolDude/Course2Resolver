@@ -188,11 +188,11 @@ namespace Course2
             var aswx0 = asw.Inductance6to10;
             d["{aswx0}"] = aswx0.ToString();
 
-            var Ma10 = Psum * 12 / 1000;
-            d["{Ma10}"] = Ma04.ToString();
+            var Ma10 = Psum * 12;
+            d["{Ma10}"] = Ma10.ToString();
 
-            var Mp10 = Qdaymax * 12 / 1000;
-            d["{Mp10}"] = Mp04.ToString();
+            var Mp10 = Qdaymax * 12;
+            d["{Mp10}"] = Mp10.ToString();
 
             var Uloses10 = (aswr0 * Ma10 / 10) + (aswx0 * Mp10 / 10);
             d["{Uloses10}"] = Uloses10.ToString();
