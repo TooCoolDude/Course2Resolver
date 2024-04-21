@@ -237,10 +237,10 @@ namespace Course2
             var Ztr = Math.Sqrt(Math.Pow(Rtr + 0.002, 2) + (Xtr * Xtr));
             d["{Ztr}"] = Ztr.ToString();
 
-            var Ikn = 0.38 / (Math.Sqrt(3) * (0.006 * Z1004 + Ztr));
+            var Ikn = 0.38 / (Math.Sqrt(3) * (0.006 + Z1004 + Ztr));
             d["{Ikn}"] = Ikn.ToString();
 
-            var Ik1three = 0.38 / (Math.Sqrt(3) * (0.006 * Z1004 + Ztr + Z04));
+            var Ik1three = 0.38 / (Math.Sqrt(3) * (0.006 + Z1004 + Ztr + Z04));
             d["{Ik1three}"]= Ik1three.ToString();
 
             var Ik1two = Ik1three * (Math.Sqrt(3) / 2);
@@ -284,7 +284,7 @@ namespace Course2
             var iud10 = Math.Sqrt(2) * kud * Ikv10;
             d["{iud10}"] = iud10.ToString();
 
-            var iud04 = Math.Sqrt(2) * kud * Ikv;
+            var iud04 = Math.Sqrt(2) * kud * Ikn;
             d["{iud04}"] = iud04.ToString();
 
             var Ipv = 1.25 * Imax10;

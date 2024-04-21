@@ -21,7 +21,7 @@ namespace Course2
 
             List<WireAS> wires = new List<WireAS>();
 
-            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
             for (int i = 11; i < 74; i += 7)
             {
 
@@ -35,10 +35,10 @@ namespace Course2
                         TypeAS_Current: sheet1.GetCellData<double>("A" + (i + 5)) / 10,
                         TypeAS_Resistance: sheet1.GetCellData<double>("A" + (i + 6)),
 
-                        Inductance1: sheet1.GetCellData<double>("A" + (i + 72)),
-                        Inductance6to10: sheet1.GetCellData<double>("A" + (i + 73)),
-                        Inductance35: sheet1.GetCellData<double>("A" + (i + 74)),
-                        Inductance110: sheet1.GetCellData<double>("A" + (i + 75))
+                        Inductance1: sheet1.GetCellData<double>("C" + (i + 1)),
+                        Inductance6to10: sheet1.GetCellData<double>("C" + (i + 2)),
+                        Inductance35: sheet1.GetCellData<double>("C" + (i + 3)),
+                        Inductance110: sheet1.GetCellData<double>("C" + (i + 4))
                     );
 
                 wires.Add(wire);
