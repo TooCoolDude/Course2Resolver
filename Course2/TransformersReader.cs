@@ -30,10 +30,10 @@ namespace Course2
                         Power: sheet1.GetCellData<double>("A" + i),
                         FirstVoltages: sheet1.GetCellData<string>("A" + (i + 1)).Split(';').Select(x => double.Parse(x.Trim())).ToArray(),
                         SecondVoltages: sheet1.GetCellData<string>("A" + (i + 2)).Split('/').Select(x => double.Parse(x.Trim())).ToArray(),
-                        ShortVoltages: sheet1.GetCellData<string>("A" + (i + 3)).Split('/').Select(x => double.Parse(x.Trim())).ToArray(),
+                        ShortVoltages: sheet1.GetCellData<string>("A" + (i + 3)).Split('/').Select(x => double.Parse(x.Replace(',', '.').Trim())).ToArray(),
                         NoLoadCurrent: sheet1.GetCellData<double>("A" + (i + 4)),
                         NoLoadLoses: sheet1.GetCellData<double>("A" + (i + 5)),
-                        ShortLoses: sheet1.GetCellData<string>("A" + (i + 6)).Split('/').Select(x => double.Parse(x.Trim())).ToArray()
+                        ShortLoses: sheet1.GetCellData<string>("A" + (i + 6)).Split('/').Select(x => double.Parse(x.Replace(',', '.').Trim())).ToArray()
                     );
 
                 if (transformer.FirstVoltages.Contains(10))
