@@ -22,7 +22,6 @@ namespace Course2
             List<Transformer> transformers = new List<Transformer>();
 
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-
             for (int i = 11; i < 145; i += 7)
             {
 

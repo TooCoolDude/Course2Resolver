@@ -45,7 +45,7 @@ namespace Course2
             {
                 con = null;
             }
-            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+            //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
 
             var dayCosFi = con.DayCosFi;
             d["{dayCosFi}"] = dayCosFi.ToString();
@@ -100,7 +100,7 @@ namespace Course2
             {
                 tr = null;
             }
-            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+            //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
 
             var Psum = PmaxDay + Plights;
             d["{Psum}"] = Psum.ToString();
@@ -142,7 +142,7 @@ namespace Course2
             {
                 sip = null;
             }
-            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+            //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
 
             var sipName = sip.WiresNumAndSize;
             d["{sipName}"] = sipName.ToString();
@@ -177,7 +177,7 @@ namespace Course2
             {
                 asw = null;
             }
-            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+            //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
 
             var aswSize = asw.WireSize;
             d["{aswSize}"] = aswSize.ToString();
@@ -306,6 +306,7 @@ namespace Course2
 
         private static string ShortenStringNum(string s)
         {
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
             int pointPosition = 0;
             for (int i = 0; i < s.Length; i++)
             {
@@ -321,7 +322,11 @@ namespace Course2
                     }
                 }
                 if (s[i] == '.')
-                    throw new Exception("CultureInfo was fucked up");
+                {
+                    return ShortenStringNum(s.Replace('.', ','));
+                    //throw new Exception("CultureInfo was fucked up");
+                }
+
             }
             return s;
         }

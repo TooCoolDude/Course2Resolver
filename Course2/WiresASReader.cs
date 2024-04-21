@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using unvell.ReoGrid.IO;
 using unvell.ReoGrid;
+using System.Globalization;
 
 namespace Course2
 {
@@ -20,6 +21,7 @@ namespace Course2
 
             List<WireAS> wires = new List<WireAS>();
 
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
             for (int i = 11; i < 74; i += 7)
             {
 

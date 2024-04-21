@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using unvell.ReoGrid.IO;
 using unvell.ReoGrid;
 using System.Security.AccessControl;
+using System.Globalization;
 
 namespace Course2
 {
@@ -21,6 +22,7 @@ namespace Course2
 
             List<Variant> variants = new List<Variant>();
 
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
             for (int i = 2; i < 32; i++) 
             {
 
