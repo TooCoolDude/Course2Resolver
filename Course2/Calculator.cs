@@ -222,7 +222,7 @@ namespace Course2
 
 
 
-            var Ikv = 0.38 / (Math.Sqrt(3) * (0.006 * Z1004));
+            var Ikv = 0.38 / (Math.Sqrt(3) * (0.006 + Z1004));
             d["{Ikv}"] = Ikv.ToString();
 
             var Ikv10 = Ikv * 0.38 / 10;

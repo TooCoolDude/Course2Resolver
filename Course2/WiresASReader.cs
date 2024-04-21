@@ -21,7 +21,7 @@ namespace Course2
 
             List<WireAS> wires = new List<WireAS>();
 
-            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
             for (int i = 11; i < 74; i += 7)
             {
 
